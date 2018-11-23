@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import Agreement from './components/docs/v1/simple/uk/Agreement';
-import PrivacyPolicy from './components/docs/v1/simple/uk/PrivacyPolicy';
 import NotFound from './components/pages/NotFound';
 import Home from "./components/pages/Home";
+import {DocumentPage} from "./components/pages/DocumentPage";
+import {DOCUMENT} from "./components/docs/paths";
 import './App.css';
 
 class App extends Component {
@@ -14,8 +14,7 @@ class App extends Component {
                 <div className="container">
                     <Switch>
                         <Route exact path="/" component={Home} />
-                        <Route exact path="/v1/uk/simple/agreement/:id" component={Agreement} />
-                        <Route exact path="/v1/uk/simple/privacy-policy/:id" component={PrivacyPolicy} />
+                        <Route exact path={DOCUMENT.route} component={DocumentPage} />
                         <Route component={NotFound} />
                     </Switch>
                 </div>

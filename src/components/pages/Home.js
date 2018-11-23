@@ -1,6 +1,8 @@
 import React from "react";
-import {registry} from "../docs/registry";
 import {Link} from "react-router-dom";
+import {registry} from "../docs/registry";
+import {DOCUMENT} from "../docs/paths";
+
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -35,11 +37,16 @@ export default class Home extends React.Component {
     };
 
     * getLinks(){
+        if (this.state.id === '') {
+            return
+        }
+
         let key = 0;
 
         for (let record of registry.getRecords(this.state.language, this.state.version, this.state.type)) {
             yield <li key={key}>
-                <Link to={`/v${record.version}/${record.language}/${record.type}/${record.slug}/${this.state.id}`}>
+                <Link to={DOCUMENT.generate({id: this.state.id, ...record})}
+                      target={'_blank'}>
                     {`${this.state.id} - ${record.name}`}
                 </Link>
             </li>;
@@ -73,6 +80,7 @@ export default class Home extends React.Component {
                         {[...this.getOptions(registry.types)]}
                     </select>
                 </label>
+                <p/>
                 <label>
                     App Name:&nbsp;
                     <input value={this.state.id}

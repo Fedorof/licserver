@@ -10,8 +10,9 @@ class Registry{
         this.types = [];
     }
 
-    add(component, lang, version, type, slug, name) {
+    add(component) {
         let versions, types, slugs;
+        let {lang, version, type, slug, name} = component.description;
 
         // Create nested objects of this.components[lang][version][type] = []
         versions = this.getOrCreate(this.components, lang, this.languages);
@@ -34,16 +35,18 @@ class Registry{
         let versions = version === ''? this.versions: [version];
         let types = type === ''? this.types: [type];
 
-        for (let language of languages) {
+        for (let lang of languages) {
             for (let version of versions) {
                 for (let type of types) {
-                    let records = this.components[language][version][type];
-                    if (records === undefined || records.length === 0) {
+                    if (this.components[lang] === undefined
+                            || this.components[lang][version] === undefined
+                            || this.components[lang][version][type] === undefined) {
                         continue
                     }
+                    let records = this.components[lang][version][type];
 
                     for (let [slug, record] of Object.entries(records)) {
-                        yield {language, version, type, slug, ...record}
+                        yield {lang, version, type, slug, ...record}
                     }
                 }
             }
@@ -53,5 +56,5 @@ class Registry{
 
 export let registry = new Registry();
 
-registry.add(Agreement, 'uk', '1', 'simple', 'agreement', 'Угода про використання - проста, версія 1');
-registry.add(PrivacyPolicy, 'uk', '1', 'simple', 'privacy-policy', 'Політика конфіденційності - проста, версія 1');
+registry.add(Agreement);
+registry.add(PrivacyPolicy);

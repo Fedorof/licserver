@@ -4,6 +4,14 @@ import dedent from "dedent";
 
 
 export default class Agreement extends Component {
+    static description = {
+        lang: 'uk',
+        version: '1',
+        type: 'simple',
+        slug: 'agreement',
+        name: 'Угода про використання - проста, версія 1, українською',
+    };
+
     componentDidMount() {
         const { id } = this.props.match.params;
         document.title = `${id} - Угода Про Використання`;

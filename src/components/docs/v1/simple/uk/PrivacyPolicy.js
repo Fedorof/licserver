@@ -4,6 +4,14 @@ import dedent from "dedent";
 
 
 export default class PrivacyPolicy extends Component {
+    static description = {
+        lang: 'uk',
+        version: '1',
+        type: 'simple',
+        slug: 'privacy-policy',
+        name: 'Політика конфіденційності - проста, версія 1, українською',
+    };
+
     componentDidMount() {
         const { id } = this.props.match.params;
         document.title = `${id} - Політика конфіденційності`;
