@@ -3,6 +3,7 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Agreement from './components/docs/v1/simple/uk/Agreement';
 import PrivacyPolicy from './components/docs/v1/simple/uk/PrivacyPolicy';
 import NotFound from './components/pages/NotFound';
+import Home from "./components/pages/Home";
 import './App.css';
 
 class App extends Component {
@@ -12,8 +13,9 @@ class App extends Component {
             <div className="App">
                 <div className="container">
                     <Switch>
-                        <Route exact path="/v1/simple/uk/agreement/:id" component={Agreement} />
-                        <Route exact path="v1/simple/uk/privacy-policy/:id" component={PrivacyPolicy} />
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/v1/uk/simple/agreement/:id" component={Agreement} />
+                        <Route exact path="/v1/uk/simple/privacy-policy/:id" component={PrivacyPolicy} />
                         <Route component={NotFound} />
                     </Switch>
                 </div>
